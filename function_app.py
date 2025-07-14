@@ -20,13 +20,12 @@ async def blob_trigger(myblob: func.InputStream, client):
                 f"Blob Size: {myblob.length} bytes")
 
     blobName = myblob.name.split("/")[1]
-    await client.start_new("process_document", client_input=blobName)
+    await client.start_new("process_image", client_input=blobName)
 
 # Orchestrator
-@my_app.function_name(name="process_document")
-@my_app.function_name(name="extract_metadata")
+@my_app.function_name(name="process_image")
 @my_app.orchestration_trigger(context_name="context")
-def process_document(context):
+def process_image(context):
     blobName: str = context.get_input()
     
     logging.info(f"got the image")
