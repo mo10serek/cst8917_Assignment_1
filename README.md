@@ -22,32 +22,16 @@ Azure Functions: Create Function App in Azure
 
 and then enter the following prompts:
 1. (your subscription)
-2. Get_image
+2. get-image
 3. East US
 4. Python 3.10
 5. Secrets
 
 After that, a blob storage will be created for you including a resource group where we will create all the other functions.
 
-### Deploying the Function resource
-Now we need to deploy the application by pressing `F1` and run this command:
-
-```txt
-Azure Functions: Deploy to Function App
-```
-
-and then enter the following prompts:
-1. (your subscription)
-2. (the function you created in azure)
-
-after that, all the changes will be uploaded to Azure.
-
-### Run the program
-Now press `F5` to start running the program.
-
 ## Blob Storage
 
-After the function is deploy, you need to make a container which input 'input'. Go to the storage resource and go to the containers section on the left. After that click on `create +` twice and make two new containers. Ones the function is running, submit an image file in the 'input' container. Go to the Access keys in the Security + networking section and get the first connection string and paste it in the BLOB_STORAGE_ENDPOINT environment variable in local.settings.json file.
+After the function is deploy, you need to make a container which input 'input'. Go to the storage resource, and fill in the requirements. Then click on `create +` twice and after the blob storage is created, make the input container by going to the containers section on the left. Select 'Add container' and call it input"  After that, Go to the Access keys in the `Access keys` section and get the first connection string and paste it in the `BLOB_STORAGE_ENDPOINT` environment variable in local.settings.json file.
 
 ## Binding SQL Queue
 
@@ -58,7 +42,7 @@ Now we need to run the SQL Queue binding function in the other repo.
 In Azure Portal, open Azure SQL and select Single database under Resource type and select Create under SQL Databases. Fill out the detail for the project
 
 - **Subscription**: (your subscription)
-- **Resource group**: (different resource group from the function group)
+- **Resource group**: get-image
 - **Database name**: mySampleDatabase
 - **Server**:
     - **Server name**: pick a unique name
@@ -74,7 +58,7 @@ After filling out the details, select `Create` in the `Review + create` page.
 
 ### adjusting the SQL database
 
-After the SQL database is deployed, get the connection string under **ADO.NET (SQL authentication)** and store it somewhere.
+After the SQL database is deployed, get the connection string in the `Connection strings` under **ADO.NET (SQL authentication)** and store it somewhere.
 
 After that, go the Query editor under the database blade and pastes
 
@@ -90,8 +74,6 @@ CREATE TABLE dbo.ImageMetrics (
 
 In the query and run it to save the table named `dbo.ImageMetrics` by running it.
 
-In Networking blade under the Security section in the SQL server resource, click **Allow Azure services and resources to access this server** under Exceptions.
-
 Go to the Connection strings blade under Setting section in the SQL database resource and copy the connection string under **ADO.NET** (SQL authentication) and store it in some document.
 
 ### Update your function app settings
@@ -105,11 +87,10 @@ Press F1 and run `Azure Functions: Add New Setting...` and fill out the followin
 
 After that press F1 again and run `Azure Functions: Download Remote Settings...` and select **Yes to all** to overwrite the existing local settings.
 
-## Deploying again
+### Deploying the Function resource
+Now we need to deploy the application by pressing `F5` and it will run the entire program. Go to the input container and upload any image
 
-After you created and connected the resources, deploy and run the function again. 
-
-Go to the **Query editor** blade in the database resource in Azure Portal and log in. Then select **Select Top 1000 Rows** after right click the dbo.ImageMetrics table and check the results if there is an updated row.
+after that, go to the **Query editor** blade in the database resource in Azure Portal and log in. Then select **Select Top 1000 Rows** after right click the dbo.ImageMetrics table and check the results if there are any updated rows.
 
 ## Run in Azure and check if the app is updated
 
@@ -117,7 +98,7 @@ Press F1 again to open the command palette and run `Azure Functions: Deploy to f
 
 After redeploying, run the `Execute Function Now...` command to run the function.
 
-Check Azure Storage Explorer to see if there is a new message in the queue. After that you successful run the app.
+Redue the steps in Deploying the Function resources. After that you successful run the app.
 
 ## Clean up the resources
 
