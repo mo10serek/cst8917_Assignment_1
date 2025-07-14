@@ -36,9 +36,9 @@ def process_document(context):
     imageMetadata = yield context.call_activity_with_retry("extract_metadata", retry_options, blobName)
     logging.info(f"got the metadata of {imageMetadata}")
     # Send the analyzed contents to Azure OpenAI to generate a summary.
-    result = yield context.call_activity_with_retry("send_to_SQL", retry_options, imageMetadata)
+    yield context.call_activity_with_retry("send_to_SQL", retry_options, imageMetadata)
 
-    return logging.info(f"Successfully uploaded summary to {result}")
+    return logging.info(f"Successfully uploaded summary to SQL database")
 
 @my_app.activity_trigger(input_name='blobName')
 def extract_metadata(blobName):
@@ -66,7 +66,7 @@ def extract_metadata(blobName):
 @my_app.activity_trigger(input_name='imageMetadata')
 @my_app.generic_output_binding(arg_name="toDoItems", type="sql", CommandText="dbo.MetricData", ConnectionStringSetting="SqlConnectionString",data_type=DataType.STRING)
 def send_to_SQL(imageMetadata, toDoItems: func.Out[func.SqlRow]):
-    logging.info('Python HTTP trigger function processed a request.')
+    logging.info('function is run to processed a request.')
     name = imageMetadata.get("image name")
     size_kb = imageMetadata.get("image size kb")
     width = imageMetadata.get("width")
