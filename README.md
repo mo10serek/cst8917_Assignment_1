@@ -63,7 +63,8 @@ After the SQL database is deployed, get the connection string in the `Connection
 After that, go the Query editor under the database blade and pastes
 
 ```
-CREATE TABLE dbo.ImageMetrics (
+CREATE TABLE dbo.imageMetrics (
+    Id UNIQUEIDENTIFIER PRIMARY KEY,
     Name NVARCHAR(255),
     SizeKB FLOAT,
     Width INT,
@@ -72,7 +73,7 @@ CREATE TABLE dbo.ImageMetrics (
 );
 ```
 
-In the query and run it to save the table named `dbo.ImageMetrics` by running it.
+In the query and run it to save the table named `dbo.MetricData` by running it.
 
 Go to the Connection strings blade under Setting section in the SQL database resource and copy the connection string under **ADO.NET** (SQL authentication) and store it in some document.
 
@@ -91,14 +92,6 @@ After that press F1 again and run `Azure Functions: Download Remote Settings...`
 Now we need to deploy the application by pressing `F5` and it will run the entire program. Go to the input container and upload any image
 
 after that, go to the **Query editor** blade in the database resource in Azure Portal and log in. Then select **Select Top 1000 Rows** after right click the dbo.ImageMetrics table and check the results if there are any updated rows.
-
-## Run in Azure and check if the app is updated
-
-Press F1 again to open the command palette and run `Azure Functions: Deploy to function app...`. Choose the function app you made and later select **Deploy** when you are in the redeploying process.
-
-After redeploying, run the `Execute Function Now...` command to run the function.
-
-Redue the steps in Deploying the Function resources. After that you successful run the app.
 
 ## Clean up the resources
 
