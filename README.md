@@ -99,4 +99,4 @@ After you finish a function application, go to the resource groups in Azure Port
 
 ## Link for demo
 
-(cst8917-Assignment-1)[https://youtu.be/wCYx52_xfXk]
+[cst8917-Assignment-1](https://youtu.be/wCYx52_xfXk)
