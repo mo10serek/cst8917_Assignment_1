@@ -93,6 +93,14 @@ Now we need to deploy the application by pressing `F5` and it will run the entir
 
 after that, go to the **Query editor** blade in the database resource in Azure Portal and log in. Then select **Select Top 1000 Rows** after right click the dbo.ImageMetrics table and check the results if there are any updated rows.
 
+#### Run again and deploy the function to Azure
+
+Press F1 again to open the command palette and run `Azure Functions: Deploy to function app...`. Choose the function app you made and later select **Deploy** when you are in the redeploying process.
+
+After redeploying, run the `Execute Function Now...` command to run the function.
+
+submit the image in the blob storage and check if the database is updated
+
 ## Clean up the resources
 
 After you finish a function application, go to the resource groups in Azure Portal and delete each one of them to prevent additional costs.
